@@ -1,19 +1,25 @@
 export default function Page() {
   return (
-    <section>
-      <h1>
-        Premium Landing Page
-      </h1>
+    <section className="hero">
+      <div className="hero-content">
+        <h1 className="hero-title">
+          Build Premium
+          Digital Experiences
+        </h1>
 
-      <p>
-        Your Next.js app works.
-      </p>
+        <p className="hero-text">
+          Conversion-focused websites
+          engineered for growth and
+          modern brands.
+        </p>
 
-      <br />
-
-      <button>
-        Book Call
-      </button>
+        <button
+          className="cta-btn"
+          data-cta="hero"
+        >
+          Book Call
+        </button>
+      </div>
     </section>
   );
 }
