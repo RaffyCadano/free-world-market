@@ -311,3 +311,64 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+.approach-section {
+  background: var(--NAVY);
+}
+
+.approach-grid {
+  margin-top: 5rem;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 2px;
+}
+
+.approach-card {
+  background: var(--NAVY-2);
+
+  padding: 3rem;
+
+  transition: 0.4s ease;
+
+  border-top: 1px solid transparent;
+}
+
+.approach-card:hover {
+  transform: translateY(-6px);
+
+  background: var(--NAVY-3);
+
+  border-top: 1px solid var(--GOLD);
+}
+
+.phase-number {
+  color: var(--GOLD);
+
+  font-family: var(--FF-HEAD);
+
+  font-size: 2rem;
+
+  margin-bottom: 2rem;
+}
+
+.approach-card h3 {
+  font-family: var(--FF-HEAD);
+
+  margin-bottom: 1rem;
+
+  font-size: 1.5rem;
+}
+
+.approach-card p {
+  color: var(--CREAM-2);
+
+  line-height: 1.7;
+}
+
+@media (max-width: 960px) {
+  .approach-grid {
+    grid-template-columns: 1fr;
+  }
+}
