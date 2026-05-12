@@ -1,3 +1,4 @@
+import CustomCursor from '../components/CustomCursor';
 import Navbar from '../components/Navbar';
 
 export default function ApproachPage() {
@@ -60,6 +61,7 @@ export default function ApproachPage() {
           </div>
         </div>
       </section>
+      <CustomCursor />
     </>
   );
 }
