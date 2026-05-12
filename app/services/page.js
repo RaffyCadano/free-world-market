@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import CustomCursor from '../components/CustomCursor';
 
 export default function ServicesPage() {
   const services = [
@@ -62,8 +63,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-      <div className="cursor-dot" ref={cursorDot} />
-      <div className="cursor-ring" ref={cursorRing} />
+      <CustomCursor />
     </>
   );
 }

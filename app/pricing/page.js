@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import CustomCursor from '../components/CustomCursor';
 
 export default function PricingPage() {
   const tiers = [
@@ -58,8 +59,7 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
-      <div className="cursor-dot" ref={cursorDot} />
-      <div className="cursor-ring" ref={cursorRing} />
+      <CustomCursor />
     </>
   );
 }
