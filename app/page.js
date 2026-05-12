@@ -1,3 +1,4 @@
+import Trust from './sections/Trust';
 import Services from './sections/Services';
 import Approach from './sections/Approach';
 import Problem from './sections/Problem';
@@ -38,6 +39,8 @@ export default function Page() {
       <Approach />
       
       <Services />
+      
+      <Trust />
     </>
   );
 }
