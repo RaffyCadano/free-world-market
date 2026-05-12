@@ -1,0 +1,346 @@
+/* ─── Hero header ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  padding: 9rem 0 7rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 40% at 18% 30%, rgba(201, 168, 76, 0.14), transparent),
+    radial-gradient(ellipse 40% 30% at 80% 12%, rgba(42, 157, 143, 0.10), transparent);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--FF-LABEL);
+  color: var(--TEAL);
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.82rem;
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--TEAL);
+  opacity: 0.7;
+}
+
+.heroTitle {
+  font-family: var(--FF-DISPLAY);
+  font-size: clamp(3.2rem, 6vw, 5.4rem);
+  line-height: 0.97;
+  letter-spacing: -0.04em;
+  color: var(--CREAM);
+  margin-bottom: 2rem;
+}
+
+.heroTitle em {
+  font-style: normal;
+  color: var(--GOLD);
+}
+
+.heroLead {
+  font-family: var(--FF-BODY);
+  font-size: 1.25rem;
+  line-height: 1.9;
+  color: var(--CREAM-2);
+  max-width: 44rem;
+}
+
+/* ─── Phase process ───────────────────────────────────────── */
+.phasesWrap {
+  position: relative;
+  margin-top: 6rem;
+}
+
+.phasesWrap::before {
+  content: '';
+  position: absolute;
+  top: 3.2rem;
+  left: calc(25% - 1px);
+  right: calc(25% - 1px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.45) 20%, rgba(201, 168, 76, 0.45) 80%, transparent);
+  pointer-events: none;
+}
+
+.phasesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+.phaseCard {
+  padding: 3rem 2.5rem 3rem;
+  border-top: 2px solid transparent;
+  background: rgba(9, 21, 41, 0.82);
+  transition: border-color 0.3s ease, background 0.35s ease, transform 0.35s ease;
+  cursor: default;
+}
+
+.phaseCard:hover {
+  border-top-color: var(--GOLD);
+  background: rgba(12, 26, 50, 0.96);
+  transform: translateY(-5px);
+}
+
+.phaseCard + .phaseCard {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.phaseNum {
+  font-family: var(--FF-HEAD);
+  font-size: 3rem;
+  color: rgba(201, 168, 76, 0.22);
+  line-height: 1;
+  margin-bottom: 1.8rem;
+  transition: color 0.3s ease;
+}
+
+.phaseCard:hover .phaseNum {
+  color: var(--GOLD);
+}
+
+.phaseTitle {
+  font-family: var(--FF-HEAD);
+  font-size: 1.35rem;
+  color: var(--CREAM);
+  margin-bottom: 0.9rem;
+}
+
+.phaseText {
+  font-family: var(--FF-BODY);
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--CREAM-3);
+}
+
+/* ─── Divider ─────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 7rem 0 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dividerGem {
+  width: 8px;
+  height: 8px;
+  background: var(--GOLD);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+/* ─── Values section ──────────────────────────────────────── */
+.valuesSection {
+  padding: 7rem 0 0;
+}
+
+.sectionLabel {
+  font-family: var(--FF-LABEL);
+  color: var(--GOLD);
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 0.78rem;
+  margin-bottom: 0.9rem;
+}
+
+.sectionHeading {
+  font-family: var(--FF-HEAD);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  color: var(--CREAM);
+  margin-bottom: 4rem;
+  line-height: 1.1;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.valueCard {
+  background: rgba(11, 22, 44, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 3rem;
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, 0.25);
+  background: rgba(14, 28, 54, 0.96);
+}
+
+.valueIcon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+  font-size: 1.35rem;
+}
+
+.valueTitle {
+  font-family: var(--FF-HEAD);
+  font-size: 1.2rem;
+  color: var(--CREAM);
+  margin-bottom: 0.9rem;
+}
+
+.valueText {
+  font-family: var(--FF-BODY);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--CREAM-2);
+}
+
+/* ─── Impact section ──────────────────────────────────────── */
+.impactSection {
+  padding: 7rem 0 0;
+  background: rgba(6, 17, 41, 0.55);
+  margin: 7rem -5rem 0;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.impactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 4rem;
+}
+
+.impactCard {
+  background: rgba(9, 21, 41, 0.9);
+  padding: 3.5rem 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.impactCard:hover {
+  background: rgba(13, 28, 54, 0.98);
+  border-top-color: var(--TEAL);
+}
+
+.impactNum {
+  font-family: var(--FF-HEAD);
+  font-size: 2.8rem;
+  color: var(--TEAL-BRIGHT);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.impactTitle {
+  font-family: var(--FF-HEAD);
+  font-size: 1.15rem;
+  color: var(--CREAM);
+  margin-bottom: 1rem;
+}
+
+.impactText {
+  font-family: var(--FF-BODY);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--CREAM-2);
+}
+
+/* ─── Closing CTA ─────────────────────────────────────────── */
+.ctaSection {
+  padding: 8rem 0 10rem;
+  text-align: center;
+  position: relative;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201, 168, 76, 0.07), transparent);
+  pointer-events: none;
+}
+
+.ctaQuote {
+  font-family: var(--FF-BODY);
+  font-size: 1.65rem;
+  line-height: 1.75;
+  color: var(--CREAM-2);
+  max-width: 42rem;
+  margin: 0 auto 3.5rem;
+  font-style: italic;
+}
+
+.ctaActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .phasesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .phasesWrap::before {
+    display: none;
+  }
+
+  .phaseCard + .phaseCard {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .valuesGrid,
+  .impactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .impactSection {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .heroTitle {
+    font-size: 2.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .phasesGrid {
+    grid-template-columns: 1fr;
+  }
+}

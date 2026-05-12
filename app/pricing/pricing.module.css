@@ -1,0 +1,456 @@
+/* ─── Hero ────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  padding: 9rem 0 6rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 45% at 15% 25%, rgba(201, 168, 76, 0.13), transparent),
+    radial-gradient(ellipse 35% 28% at 82% 14%, rgba(42, 157, 143, 0.09), transparent);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--FF-LABEL);
+  color: var(--TEAL);
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.82rem;
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--TEAL);
+  opacity: 0.7;
+}
+
+.heroTitle {
+  font-family: var(--FF-DISPLAY);
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  line-height: 0.97;
+  letter-spacing: -0.04em;
+  color: var(--CREAM);
+  margin-bottom: 2rem;
+}
+
+.heroTitle em {
+  font-style: normal;
+  color: var(--GOLD);
+}
+
+.heroLead {
+  font-family: var(--FF-BODY);
+  font-size: 1.22rem;
+  line-height: 1.9;
+  color: var(--CREAM-2);
+  max-width: 42rem;
+}
+
+/* ─── Tiers ───────────────────────────────────────────────── */
+.tiersSection {
+  padding: 0 0 2rem;
+}
+
+.tiersGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 5rem;
+}
+
+.tier {
+  position: relative;
+  background: rgba(9, 21, 41, 0.88);
+  border-top: 2px solid transparent;
+  padding: 4rem 3rem 3.5rem;
+  transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+  cursor: default;
+}
+
+.tier:hover {
+  transform: translateY(-6px);
+  background: rgba(13, 28, 54, 0.98);
+  border-top-color: var(--GOLD);
+}
+
+.tier.featured {
+  background: rgba(13, 28, 54, 0.98);
+  border-top: 2px solid var(--GOLD);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: -1px;
+  right: 2rem;
+  background: var(--GOLD);
+  color: var(--NAVY);
+  font-family: var(--FF-LABEL);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+}
+
+.tierName {
+  font-family: var(--FF-HEAD);
+  font-size: 1.1rem;
+  color: var(--GOLD);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.tierPrice {
+  font-family: var(--FF-HEAD);
+  font-size: 3.6rem;
+  color: var(--CREAM);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.tierCadence {
+  font-family: var(--FF-LABEL);
+  color: var(--CREAM-3);
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.tierDesc {
+  font-family: var(--FF-BODY);
+  font-size: 1.1rem;
+  color: var(--CREAM-2);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  min-height: 3.5rem;
+}
+
+.tierFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 2rem;
+}
+
+.tierFeatures li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: var(--FF-BODY);
+  font-size: 1.05rem;
+  color: var(--CREAM-2);
+  margin-bottom: 0.9rem;
+  line-height: 1.5;
+}
+
+.tierFeatures li::before {
+  content: '◆';
+  color: var(--GOLD);
+  font-size: 0.5rem;
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+}
+
+.tierBtn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border-radius: 999px;
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  background: transparent;
+  color: var(--CREAM);
+  font-family: var(--FF-LABEL);
+  font-size: 0.88rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.tierBtn:hover,
+.tier.featured .tierBtn {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8c96a 100%);
+  border-color: transparent;
+  color: var(--NAVY);
+}
+
+/* ─── Divider ─────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 6rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dividerGem {
+  width: 8px;
+  height: 8px;
+  background: var(--GOLD);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+/* ─── Highlights ──────────────────────────────────────────── */
+.highlightsSection {
+  padding: 0 0 2rem;
+}
+
+.sectionLabel {
+  font-family: var(--FF-LABEL);
+  color: var(--GOLD);
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 0.78rem;
+  margin-bottom: 0.9rem;
+}
+
+.sectionHeading {
+  font-family: var(--FF-HEAD);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  color: var(--CREAM);
+  margin-bottom: 4rem;
+  line-height: 1.1;
+}
+
+.highlightsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.highlightCard {
+  background: rgba(11, 22, 44, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 3rem;
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.highlightCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, 0.25);
+  background: rgba(14, 28, 54, 0.96);
+}
+
+.highlightIcon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1.75rem;
+}
+
+.highlightTitle {
+  font-family: var(--FF-HEAD);
+  font-size: 1.15rem;
+  color: var(--CREAM);
+  margin-bottom: 0.9rem;
+}
+
+.highlightText {
+  font-family: var(--FF-BODY);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--CREAM-2);
+}
+
+/* ─── Compare table ───────────────────────────────────────── */
+.compareSection {
+  padding: 6rem 0 2rem;
+}
+
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 3.5rem;
+}
+
+.compareTable th,
+.compareTable td {
+  padding: 1.2rem 1.5rem;
+  text-align: center;
+  font-family: var(--FF-BODY);
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.compareTable th {
+  font-family: var(--FF-HEAD);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: var(--GOLD);
+  background: rgba(9, 21, 41, 0.9);
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+}
+
+.compareTable th:first-child,
+.compareTable td:first-child {
+  text-align: left;
+  color: var(--CREAM-2);
+}
+
+.compareTable td {
+  color: var(--CREAM-2);
+  background: rgba(7, 17, 35, 0.75);
+}
+
+.compareTable tr:hover td {
+  background: rgba(11, 24, 46, 0.9);
+}
+
+.check {
+  color: var(--TEAL-BRIGHT);
+  font-size: 1.1rem;
+}
+
+.dash {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── FAQ ─────────────────────────────────────────────────── */
+.faqSection {
+  padding: 6rem 0 2rem;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin-top: 3.5rem;
+}
+
+.faqItem {
+  background: rgba(9, 21, 41, 0.82);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 2.5rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.faqItem:hover {
+  background: rgba(13, 28, 54, 0.98);
+  border-top-color: rgba(201, 168, 76, 0.3);
+}
+
+.faqQ {
+  font-family: var(--FF-HEAD);
+  font-size: 1.1rem;
+  color: var(--CREAM);
+  margin-bottom: 0.9rem;
+}
+
+.faqA {
+  font-family: var(--FF-BODY);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--CREAM-2);
+}
+
+/* ─── CTA ─────────────────────────────────────────────────── */
+.ctaSection {
+  padding: 8rem 0 10rem;
+  text-align: center;
+  position: relative;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201, 168, 76, 0.07), transparent);
+  pointer-events: none;
+}
+
+.ctaHeading {
+  font-family: var(--FF-HEAD);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  color: var(--CREAM);
+  margin-bottom: 1.25rem;
+  line-height: 1.1;
+}
+
+.ctaHeading em {
+  font-style: normal;
+  color: var(--GOLD);
+}
+
+.ctaLead {
+  font-family: var(--FF-BODY);
+  font-size: 1.2rem;
+  color: var(--CREAM-2);
+  max-width: 38rem;
+  margin: 0 auto 3rem;
+  line-height: 1.85;
+}
+
+.ctaActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.ctaNote {
+  margin-top: 1.5rem;
+  font-family: var(--FF-LABEL);
+  font-size: 0.8rem;
+  color: var(--CREAM-3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .tiersGrid,
+  .highlightsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .compareTable th,
+  .compareTable td {
+    padding: 1rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .heroTitle {
+    font-size: 2.8rem;
+  }
+}

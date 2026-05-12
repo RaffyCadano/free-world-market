@@ -2,58 +2,70 @@
 
 import { useEffect, useState } from 'react';
 
+const links = [
+  { label: 'Problem',  href: '/problem' },
+  { label: 'Approach', href: '/approach' },
+  { label: 'Services', href: '/services' },
+  { label: 'Pricing',  href: '/pricing' },
+];
+
 export default function Navbar() {
-  const [scrolled, setScrolled] =
-    useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    window.addEventListener(
-      'scroll',
-      handleScroll
-    );
-
-    return () =>
-      window.removeEventListener(
-        'scroll',
-        handleScroll
-      );
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 960) setOpen(false); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   return (
-    <nav
-      className={
-        scrolled
-          ? 'navbar scrolled'
-          : 'navbar'
-      }
-    >
-      <div className="wrap nav-inner">
-        <div className="nav-logo">
-          LUXE GROWTH
-        </div>
+    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
+      <div className="nav-inner">
 
-        <div className="nav-links">
-          <a href="/problem">
-            Problem
-          </a>
+        {/* Logo */}
+        <a href="/" className="nav-logo-wrap">
+          <span className="nav-logo">LUXE GROWTH</span>
+          <span className="nav-logo-sub">Premium Acquisition Systems</span>
+        </a>
 
-          <a href="/approach">
-            Approach
-          </a>
-
-          <a href="/services">
-            Services
-          </a>
-
-          <a href="/pricing">
-            Pricing
+        {/* Centre links */}
+        <div className={`nav-links${open ? ' nav-links--open' : ''}`}>
+          {links.map(({ label, href }) => (
+            <a key={href} href={href} onClick={() => setOpen(false)}>
+              {label}
+            </a>
+          ))}
+          {/* CTA inside drawer on mobile */}
+          <a href="/pricing" className="nav-cta nav-cta--mobile" onClick={() => setOpen(false)}>
+            Book a Call
           </a>
         </div>
+
+        {/* Right side */}
+        <div className="nav-right">
+          <a href="/pricing" className="nav-cta">Book a Call</a>
+          <button
+            className={`nav-burger${open ? ' nav-burger--open' : ''}`}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+
       </div>
+
+      {/* Mobile backdrop */}
+      {open && <div className="nav-backdrop" onClick={() => setOpen(false)} />}
     </nav>
   );
 }

@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import Footer from './components/Footer';
 
 export const metadata = {
   title: 'Luxury Growth Systems',
@@ -25,7 +26,10 @@ export default function RootLayout({
         />
       </head>
 
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
