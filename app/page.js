@@ -1,3 +1,4 @@
+import Marquee from './sections/Marquee';
 import FinalCTA from './sections/FinalCTA';
 import Pricing from './sections/Pricing';
 import Trust from './sections/Trust';
@@ -36,6 +37,8 @@ export default function Page() {
         </div>
       </section>
 
+      <Marquee />
+
       <Problem />
 
       <Approach />
@@ -47,6 +50,7 @@ export default function Page() {
       <Pricing />
       
       <FinalCTA />
+      
     </>
   );
 }
