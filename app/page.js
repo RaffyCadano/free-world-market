@@ -1,3 +1,4 @@
+import Pricing from './sections/Pricing';
 import Trust from './sections/Trust';
 import Services from './sections/Services';
 import Approach from './sections/Approach';
@@ -41,6 +42,8 @@ export default function Page() {
       <Services />
       
       <Trust />
+      
+      <Pricing />
     </>
   );
 }

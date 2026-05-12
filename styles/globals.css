@@ -542,3 +542,98 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+.pricing-section {
+  background: var(--NAVY-2);
+}
+
+.tiers-grid {
+  margin-top: 5rem;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 2px;
+}
+
+.tier {
+  position: relative;
+
+  background: var(--NAVY);
+
+  padding: 4rem 3rem;
+
+  transition: 0.4s ease;
+
+  border-top: 1px solid transparent;
+}
+
+.tier:hover {
+  background: var(--NAVY-3);
+
+  transform: translateY(-6px);
+
+  border-top: 1px solid var(--GOLD);
+}
+
+.tier.featured {
+  background: var(--NAVY-3);
+
+  border-top: 1px solid var(--GOLD);
+}
+
+.tier-badge {
+  position: absolute;
+
+  top: 1.5rem;
+  right: 1.5rem;
+
+  background: var(--GOLD);
+
+  color: var(--NAVY);
+
+  padding: 0.5rem 1rem;
+
+  font-family: var(--FF-LABEL);
+
+  font-size: 0.8rem;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+.tier h3 {
+  font-family: var(--FF-HEAD);
+
+  color: var(--GOLD);
+
+  margin-bottom: 2rem;
+
+  font-size: 2rem;
+}
+
+.tier-price {
+  font-size: 4rem;
+
+  color: var(--CREAM);
+
+  margin-bottom: 2rem;
+
+  font-family: var(--FF-HEAD);
+}
+
+.tier p {
+  color: var(--CREAM-2);
+
+  line-height: 1.7;
+
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 960px) {
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
+}
