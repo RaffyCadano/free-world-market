@@ -40,6 +40,45 @@ body {
   font-family: var(--FF-BODY);
 }
 
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+}
+
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--GOLD);
+  box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.35);
+}
+
+.cursor-ring {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 50%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: block;
+  }
+}
+
 a {
   text-decoration: none;
   color: inherit;
