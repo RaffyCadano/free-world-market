@@ -55,6 +55,8 @@ export default function ProblemPage() {
           </div>
         </div>
       </section>
+      <div className="cursor-dot" ref={cursorDot} />
+      <div className="cursor-ring" ref={cursorRing} />
     </>
   );
 }
