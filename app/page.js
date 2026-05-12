@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
 import Services from './sections/Services';
 import Approach from './sections/Approach';
 import Problem from './sections/Problem';
@@ -88,14 +85,13 @@ export default function Page() {
         </div>
       </section>
 
+      <Marquee />
+
       <Problem />
 
       <Approach />
       
       <Services />
-
-      <div className="cursor-dot" ref={cursorDot} />
-      <div className="cursor-ring" ref={cursorRing} />
     </>
   );
 }
