@@ -1,3 +1,4 @@
+import FinalCTA from './sections/FinalCTA';
 import Pricing from './sections/Pricing';
 import Trust from './sections/Trust';
 import Services from './sections/Services';
@@ -44,6 +45,8 @@ export default function Page() {
       <Trust />
       
       <Pricing />
+      
+      <FinalCTA />
     </>
   );
 }

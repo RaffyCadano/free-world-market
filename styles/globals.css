@@ -637,3 +637,86 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+.final-section {
+  background: var(--NAVY);
+}
+
+.final-form {
+  margin-top: 4rem;
+
+  display: flex;
+
+  gap: 2px;
+}
+
+.final-form input {
+  flex: 1;
+
+  background: var(--NAVY-2);
+
+  border: none;
+
+  color: var(--CREAM);
+
+  padding: 1.2rem 1.5rem;
+
+  font-size: 1rem;
+
+  font-family: var(--FF-BODY);
+}
+
+.final-form input::placeholder {
+  color: var(--CREAM-3);
+}
+
+.success {
+  background: var(--TEAL);
+
+  color: white;
+}
+
+.contact-grid {
+  margin-top: 5rem;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 2px;
+}
+
+.contact-grid div {
+  background: var(--NAVY-2);
+
+  padding: 2rem;
+}
+
+.contact-grid span {
+  display: block;
+
+  color: var(--GOLD);
+
+  font-family: var(--FF-LABEL);
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 1rem;
+}
+
+.contact-grid a,
+.contact-grid p {
+  color: var(--CREAM-2);
+}
+
+@media (max-width: 960px) {
+  .final-form {
+    flex-direction: column;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
