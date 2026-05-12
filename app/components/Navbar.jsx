@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import CalendlyButton from './CalendlyButton';
 
 const links = [
   { label: 'Problem',  href: '/problem' },
@@ -44,14 +45,14 @@ export default function Navbar() {
             </a>
           ))}
           {/* CTA inside drawer on mobile */}
-          <a href="/pricing" className="nav-cta nav-cta--mobile" onClick={() => setOpen(false)}>
+          <CalendlyButton location="nav" className="nav-cta nav-cta--mobile">
             Book a Call
-          </a>
+          </CalendlyButton>
         </div>
 
         {/* Right side */}
         <div className="nav-right">
-          <a href="/pricing" className="nav-cta">Book a Call</a>
+          <CalendlyButton location="nav" className="nav-cta">Book a Call</CalendlyButton>
           <button
             className={`nav-burger${open ? ' nav-burger--open' : ''}`}
             aria-label="Toggle menu"

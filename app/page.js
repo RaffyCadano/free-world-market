@@ -3,6 +3,7 @@ import Approach from './sections/Approach';
 import Problem from './sections/Problem';
 import Navbar from './components/Navbar';
 import CustomCursor from './components/CustomCursor';
+import CalendlyButton from './components/CalendlyButton';
 import s from './home.module.css';
 
 const marqueeItems = [
@@ -90,7 +91,7 @@ export default function Page() {
               engineered for premium service businesses ready to grow beyond referrals.
             </p>
             <div className={s.heroActions}>
-              <a href="/pricing" className="cta-btn">View pricing</a>
+              <CalendlyButton location="hero" className="cta-btn">Book a Discovery Call</CalendlyButton>
               <a href="/approach" className="cta-btn cta-secondary">See our approach</a>
             </div>
 
@@ -207,7 +208,7 @@ export default function Page() {
             model and map out the fastest path to premium, predictable growth.
           </p>
           <div className={s.ctaActions}>
-            <a href="/pricing" className="cta-btn">Book discovery call</a>
+            <CalendlyButton location="cta_final" className="cta-btn">Book discovery call</CalendlyButton>
             <a href="/services" className="cta-btn cta-secondary">Explore services</a>
           </div>
           <p className={s.ctaNote}>No obligation &nbsp;&middot;&nbsp; No sales pitch &nbsp;&middot;&nbsp; 30 minutes</p>

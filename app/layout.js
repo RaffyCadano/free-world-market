@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import Footer from './components/Footer';
+import Analytics from './components/Analytics';
 
 export const metadata = {
   title: 'Luxury Growth Systems',
@@ -27,6 +28,7 @@ export default function RootLayout({
       </head>
 
       <body>
+        <Analytics />
         {children}
         <Footer />
       </body>
