@@ -33,7 +33,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <a href="/" className="nav-logo-wrap">
-          <span className="nav-logo">HI GROWTH</span>
+          <span className="nav-logo">LUXE GROWTH</span>
           <span className="nav-logo-sub">Premium Acquisition Systems</span>
         </a>
 
