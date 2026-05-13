@@ -37,19 +37,19 @@ export default function Navbar() {
         </div>
 
         <div className="nav-links">
-          <a href="#problem">
+          <a href="/problem">
             Problem
           </a>
 
-          <a href="#approach">
+          <a href="/approach">
             Approach
           </a>
 
-          <a href="#services">
+          <a href="/services">
             Services
           </a>
 
-          <a href="#pricing">
+          <a href="/pricing">
             Pricing
           </a>
         </div>
