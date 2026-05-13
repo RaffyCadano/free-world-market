@@ -1,5 +1,6 @@
 'use client';
 
+import Footer from './components/Footer';
 import { useEffect, useRef } from 'react';
 import Services from './sections/Services';
 import Approach from './sections/Approach';
@@ -96,6 +97,7 @@ export default function Page() {
 
       <div className="cursor-dot" ref={cursorDot} />
       <div className="cursor-ring" ref={cursorRing} />
+      <Footer />
     </>
   );
 }
