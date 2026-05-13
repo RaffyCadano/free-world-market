@@ -58,8 +58,6 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
-      <div className="cursor-dot" ref={cursorDot} />
-      <div className="cursor-ring" ref={cursorRing} />
     </>
   );
 }

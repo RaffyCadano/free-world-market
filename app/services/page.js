@@ -62,8 +62,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-      <div className="cursor-dot" ref={cursorDot} />
-      <div className="cursor-ring" ref={cursorRing} />
     </>
   );
 }
