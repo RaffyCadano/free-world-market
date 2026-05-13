@@ -111,7 +111,7 @@ No HubSpot secret values are exposed to the browser.
 
 Use this list to track requested improvements.
 
-- [X] #1 Responsive design across all screen sizes (mobile, tablet, desktop, and large displays).
+- [ ] #1 Responsive design across all screen sizes (mobile, tablet, desktop, and large displays).
 - [ ] #2 Update site title/branding text to:
   - XiXi Marketing & Sales
   - Free World Market Holdings
