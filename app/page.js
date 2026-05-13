@@ -1,4 +1,3 @@
-import Services from './sections/Services';
 import Approach from './sections/Approach';
 import Problem from './sections/Problem';
 import Navbar from './components/Navbar';
@@ -36,8 +35,6 @@ export default function Page() {
       <Problem />
 
       <Approach />
-      
-      <Services />
     </>
   );
 }
