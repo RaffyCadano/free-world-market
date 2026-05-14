@@ -63,7 +63,11 @@ export default function Analytics() {
         </Script>
       )}
 
-      {/* ── Calendly widget script ───────────────────────── */}
+      {/* ── Calendly popup styles + widget script ─────────── */}
+      <link
+        rel="stylesheet"
+        href="https://assets.calendly.com/assets/external/widget.css"
+      />
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="afterInteractive"
