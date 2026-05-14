@@ -1,5 +1,4 @@
 ﻿import Navbar from '../components/Navbar';
-import CustomCursor from '../components/CustomCursor';
 import s from './pricing.module.css';
 
 export default function PricingPage() {
@@ -110,7 +109,6 @@ export default function PricingPage() {
   return (
     <>
       <Navbar />
-      <CustomCursor />
 
       <div className={s.hero}>
         <div className="wrap">

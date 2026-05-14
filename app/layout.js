@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import Footer from './components/Footer';
 import Analytics from './components/Analytics';
+import CustomCursor from './components/CustomCursor';
 
 export const metadata = {
   title: 'Luxury Growth Systems',
@@ -29,6 +30,7 @@ export default function RootLayout({
 
       <body>
         <Analytics />
+        <CustomCursor />
         {children}
         <Footer />
       </body>

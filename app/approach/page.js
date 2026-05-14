@@ -1,4 +1,3 @@
-import CustomCursor from '../components/CustomCursor';
 import Navbar from '../components/Navbar';
 import s from './approach.module.css';
 
@@ -65,7 +64,6 @@ export default function ApproachPage() {
   return (
     <>
       <Navbar />
-      <CustomCursor />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <div className={s.hero}>

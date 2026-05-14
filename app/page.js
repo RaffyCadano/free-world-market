@@ -2,7 +2,6 @@
 import Approach from './sections/Approach';
 import Problem from './sections/Problem';
 import Navbar from './components/Navbar';
-import CustomCursor from './components/CustomCursor';
 import CalendlyButton from './components/CalendlyButton';
 import s from './home.module.css';
 
@@ -76,7 +75,6 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <CustomCursor />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <div className={s.hero}>

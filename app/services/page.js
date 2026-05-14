@@ -1,5 +1,4 @@
 ﻿import Navbar from '../components/Navbar';
-import CustomCursor from '../components/CustomCursor';
 import s from './services.module.css';
 
 export default function ServicesPage() {
@@ -133,7 +132,6 @@ export default function ServicesPage() {
   return (
     <>
       <Navbar />
-      <CustomCursor />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <div className={s.hero}>

@@ -39,6 +39,53 @@ body {
   color: var(--CREAM);
   overflow-x: hidden;
   font-family: var(--FF-BODY);
+  cursor: none;
+}
+
+/* ── Custom cursor ────────────────────────────────────────── */
+/* Hidden by default; JS reveals them only on true pointer devices */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, left, top;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--GOLD);
+  border-radius: 50%;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(201, 168, 76, 0.55);
+  border-radius: 50%;
+  transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+/* Grow ring on interactive elements */
+a:hover ~ .cursor-ring,
+button:hover ~ .cursor-ring {
+  width: 52px;
+  height: 52px;
+  border-color: var(--GOLD);
+}
+
+/* Restore default cursor for touch / no-hover devices */
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor-dot,
+  .cursor-ring { display: none; }
 }
 
 a {

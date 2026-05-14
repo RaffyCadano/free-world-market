@@ -1,5 +1,4 @@
 ﻿import Navbar from '../components/Navbar';
-import CustomCursor from '../components/CustomCursor';
 import s from './problem.module.css';
 
 export default function ProblemPage() {
@@ -108,7 +107,6 @@ export default function ProblemPage() {
   return (
     <>
       <Navbar />
-      <CustomCursor />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <div className={s.hero}>
