@@ -15,7 +15,7 @@
  *   500  { success: false, error: string }
  */
 
-import '@/lib/env';                                        // fail fast on missing vars
+import { validateEnv } from '@/lib/env';                    // called inside handler
 import { NextResponse } from 'next/server';
 import { submitSchema, emailOnlySchema, firstZodError } from '@/lib/validation';
 import { rateLimit } from '@/lib/rateLimit';
@@ -24,6 +24,12 @@ import { submitToHubSpot } from '@/lib/hubspot';
 /* ── Handler ─────────────────────────────────────────────── */
 
 export async function POST(request) {
+  // 0. Fail fast if env vars are missing (runtime check, not build-time)
+  try { validateEnv(); } catch (err) {
+    console.error(err.message);
+    return NextResponse.json({ success: false, error: 'Server misconfiguration.' }, { status: 500 });
+  }
+
   // 1. Rate limit by IP
   const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1')
     .split(',')[0]
