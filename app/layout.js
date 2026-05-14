@@ -3,9 +3,39 @@ import Footer from './components/Footer';
 import Analytics from './components/Analytics';
 import CustomCursor from './components/CustomCursor';
 
+const PRODUCTION_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://freeworldmarket.com';
+
 export const metadata = {
-  title: 'Luxury Growth Systems',
-  description: 'Premium conversion agency'
+  title: 'Growth Partnership Services | XiXi Marketing & Sales | Free World Market',
+  description:
+    'Done-for-you marketing and sales systems for CPAs and professional service firms. No equity. Predictable revenue. Book your free discovery call today.',
+  robots: { index: true, follow: true },
+  alternates: {
+    canonical: PRODUCTION_URL,
+  },
+  openGraph: {
+    title: 'Growth Partnership Services | XiXi Marketing & Sales | Free World Market',
+    description:
+      'Done-for-you marketing and sales systems for CPAs and professional service firms. No equity. Predictable revenue. Book your free discovery call today.',
+    url: PRODUCTION_URL,
+    siteName: 'Free World Market',
+    images: [
+      {
+        url: `${PRODUCTION_URL}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Growth Partnership Services — Free World Market',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Growth Partnership Services | Free World Market',
+    description:
+      'Done-for-you marketing and sales systems for CPAs and professional service firms.',
+    images: [`${PRODUCTION_URL}/og-image.jpg`],
+  },
 };
 
 export default function RootLayout({

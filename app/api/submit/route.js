@@ -2,104 +2,101 @@
  * app/api/submit/route.js
  *
  * Handles contact/lead form submissions server-side.
- * Validates input, then POSTs to HubSpot Forms API.
+ * POST only — validates, rate-limits, then forwards to HubSpot.
  * Secret keys never leave the server.
  *
  * POST /api/submit
  * Body: { firstName, lastName, email, company?, message? }
  *
  * Returns:
- *   200  { success: true }
+ *   200  { success: true,  message: "Lead submitted successfully" }
  *   400  { success: false, error: string }
+ *   429  { success: false, error: string, retryAfter: number }
  *   500  { success: false, error: string }
  */
 
+import '@/lib/env';                                        // fail fast on missing vars
 import { NextResponse } from 'next/server';
-
-const PORTAL_ID  = process.env.HUBSPOT_PORTAL_ID;
-const FORM_GUID  = process.env.HUBSPOT_FORM_GUID;
-const HUBSPOT_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_GUID}`;
-
-/* ── Helpers ─────────────────────────────────────────────── */
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+import { submitSchema, emailOnlySchema, firstZodError } from '@/lib/validation';
+import { rateLimit } from '@/lib/rateLimit';
+import { submitToHubSpot } from '@/lib/hubspot';
 
 /* ── Handler ─────────────────────────────────────────────── */
 
 export async function POST(request) {
-  // 1. Parse body
-  let body;
+  // 1. Rate limit by IP
+  const ip = (request.headers.get('x-forwarded-for') ?? '127.0.0.1')
+    .split(',')[0]
+    .trim();
+
+  const { allowed, retryAfter } = rateLimit(ip);
+  if (!allowed) {
+    return NextResponse.json(
+      { success: false, error: `Too many requests. Please try again in ${retryAfter} seconds.`, retryAfter },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+    );
+  }
+
+  // 2. Parse body
+  let raw;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json({ success: false, error: 'Invalid request body.' }, { status: 400 });
   }
 
-  const { firstName, lastName, email, company = '', message = '' } = body;
+  // 3. Validate + sanitize
+  // Use email-only schema when only email is provided (CTA final form),
+  // full schema when additional fields are present (contact/pricing forms).
+  const isEmailOnly = raw && typeof raw === 'object' && Object.keys(raw).every((k) => k === 'email');
+  const schema = isEmailOnly ? emailOnlySchema : submitSchema;
+  const result = schema.safeParse(raw);
 
-  // 2. Validate required fields
-  if (!firstName || typeof firstName !== 'string' || firstName.trim().length === 0) {
-    return NextResponse.json({ success: false, error: 'First name is required.' }, { status: 400 });
-  }
-  if (!lastName || typeof lastName !== 'string' || lastName.trim().length === 0) {
-    return NextResponse.json({ success: false, error: 'Last name is required.' }, { status: 400 });
-  }
-  if (!email || !isValidEmail(email.trim())) {
-    return NextResponse.json({ success: false, error: 'A valid email address is required.' }, { status: 400 });
-  }
-
-  // 3. Sanitize — strip leading/trailing whitespace; truncate to safe lengths
-  const fields = [
-    { name: 'firstname',    value: firstName.trim().slice(0, 100) },
-    { name: 'lastname',     value: lastName.trim().slice(0, 100)  },
-    { name: 'email',        value: email.trim().slice(0, 254)     },
-    { name: 'company',      value: company.trim().slice(0, 200)   },
-    { name: 'message',      value: message.trim().slice(0, 2000)  },
-  ];
-
-  // 4. Get submission metadata
-  const ipHeader = request.headers.get('x-forwarded-for') ?? '';
-  const hutk     = request.cookies.get('hubspotutk')?.value ?? '';
-  const pageUri  = request.headers.get('referer') ?? '';
-
-  // 5. Submit to HubSpot
-  try {
-    const hsResponse = await fetch(HUBSPOT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields,
-        context: {
-          hutk: hutk || undefined,
-          pageUri: pageUri || undefined,
-          ipAddress: ipHeader.split(',')[0].trim() || undefined,
-        },
-      }),
-    });
-
-    if (!hsResponse.ok) {
-      // Log server-side; never expose raw API error to the client
-      const errText = await hsResponse.text();
-      console.error('[HubSpot submit error]', hsResponse.status, errText);
-      return NextResponse.json(
-        { success: false, error: 'Could not submit your details. Please try again.' },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error('[HubSpot submit exception]', err);
+  if (!result.success) {
     return NextResponse.json(
-      { success: false, error: 'An unexpected error occurred. Please try again.' },
+      { success: false, error: firstZodError(result.error) },
+      { status: 400 }
+    );
+  }
+
+  const { email, firstName = '', lastName = '', company = '', message = '' } = result.data;
+
+  // 4. Build HubSpot payload
+  const hutk    = request.cookies.get('hubspotutk')?.value ?? '';
+  const pageUri = request.headers.get('referer') ?? '';
+
+  const payload = {
+    fields: [
+      { name: 'email',     value: email     },
+      { name: 'firstname', value: firstName },
+      { name: 'lastname',  value: lastName  },
+      { name: 'company',   value: company   },
+      { name: 'message',   value: message   },
+    ].filter((f) => f.value !== ''),          // omit empty optional fields
+    context: {
+      hutk:      hutk     || undefined,
+      pageUri:   pageUri  || undefined,
+      ipAddress: ip       || undefined,
+    },
+  };
+
+  // 5. Submit to HubSpot (timeout + retry handled inside)
+  const { ok, status, body } = await submitToHubSpot(payload);
+
+  if (!ok) {
+    console.error('[/api/submit] HubSpot error', status, body);
+    return NextResponse.json(
+      { success: false, error: 'Could not submit your details. Please try again.' },
       { status: 500 }
     );
   }
+
+  return NextResponse.json({ success: true, message: 'Lead submitted successfully.' });
 }
 
-// Reject non-POST methods
+// Reject all non-POST methods explicitly
 export function GET()    { return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 }); }
 export function PUT()    { return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 }); }
 export function DELETE() { return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 }); }
+export function PATCH()  { return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 }); }
+
